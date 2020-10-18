@@ -1,6 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
+
+import router from "./router.js";
+
 const app = express();
 
 // Connect to DB
@@ -14,6 +17,7 @@ mongoose.connect(
 
 // Midlewares
 app.use(morgan("dev"));
+app.use(express.json());
 
 // routes
 app.get("/", (req, res) => {
@@ -21,6 +25,8 @@ app.get("/", (req, res) => {
     message: "success",
   });
 });
+
+app.use("/api", router); // http://localhost:3000/api/
 
 app.listen("3000", () => {
   console.log("Listen port on 3000");

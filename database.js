@@ -1,29 +1,29 @@
 import mongoose from "mongoose";
 
 const homeworkSchema = mongoose.Schema(
-    {
-        course :{
-            type: String,
-            required: true,
-        },
-        tittle{
-            type: String,
-            required: true,
-        },
-        due_date{
-            type: Date,
-            required:true,
-        },
-        status{
-            type: String,
-            required: true,
-        }
+  {
+    course: {
+      type: String,
+      required: true,
     },
-    {
-        timestamp: true,
-    }
+    title: {
+      type: String,
+      required: true,
+    },
+    due_date: {
+      type: Date,
+      required: true,
+    },
+    status: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamp: true,
+  }
 );
 
-const Homework = mongoose.model('Homework', homeworkSchema);
+const Homework = mongoose.model("Homework", homeworkSchema);
 
 export default Homework;
