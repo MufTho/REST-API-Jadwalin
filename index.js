@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
@@ -10,7 +13,7 @@ const app = express();
 const connectDB = async () => {
   try {
     await mongoose.connect(
-      "mongodb+srv://admin:admin@dts.hlf6j.mongodb.net/jadwalin?retryWrites=true&w=majority",
+      process.env.MONGGODB_URI,
       { useNewUrlParser: true, useUnifiedTopology: true },
       () => {
         console.log("Connect To Database Success");
@@ -36,6 +39,7 @@ app.get("/", (req, res) => {
 
 app.use("/api", router); // http://localhost:3000/api/
 
-app.listen("3000", () => {
-  console.log("Listen port on 3000");
+const PORT = process.env.PORT || "4000";
+app.listen(PORT, () => {
+  console.log(`Listen on port ${PORT}`);
 });
