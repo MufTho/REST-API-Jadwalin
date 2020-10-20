@@ -20,7 +20,7 @@ const homeworkSchema = mongoose.Schema(
     },
   },
   {
-    timestamp: true,
+    timestamps: true,
   }
 );
 

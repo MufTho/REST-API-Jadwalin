@@ -50,4 +50,25 @@ router.get("/homeworks/:id", async (req, res) => {
   }
 });
 
+// @decs Update homework
+// @router PUT /api/homework/:id
+router.put("/homeworks/:id", async (req, res) => {
+  const { course, title, due_date, status } = req.body;
+
+  const homework = await Homework.findById(req.params.id);
+  if (homework) {
+    homework.course = course;
+    homework.title = title;
+    homework.due_date = due_date;
+    homework.status = status;
+
+    const updateHomework = await homework.save();
+    res.json(updateHomework);
+  } else {
+    res.status(404).json({
+      message: "homework not found",
+    });
+  }
+});
+
 export default router;

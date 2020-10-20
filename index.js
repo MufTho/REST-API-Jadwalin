@@ -7,13 +7,21 @@ import router from "./router.js";
 const app = express();
 
 // Connect to DB
-mongoose.connect(
-  "mongodb+srv://admin:admin@dts.hlf6j.mongodb.net/jadwalin?retryWrites=true&w=majority",
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  () => {
-    console.log("Connect To Database Success");
+const connectDB = async () => {
+  try {
+    await mongoose.connect(
+      "mongodb+srv://admin:admin@dts.hlf6j.mongodb.net/jadwalin?retryWrites=true&w=majority",
+      { useNewUrlParser: true, useUnifiedTopology: true },
+      () => {
+        console.log("Connect To Database Success");
+      }
+    );
+  } catch (err) {
+    console.log(err);
   }
-);
+};
+
+connectDB();
 
 // Midlewares
 app.use(morgan("dev"));
