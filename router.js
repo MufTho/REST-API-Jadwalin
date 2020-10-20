@@ -22,4 +22,18 @@ router.post("/homeworks", async (req, res) => {
   }
 });
 
+// @desc Get All HomeWork
+// @router Get /Api/Homeworks
+router.get("/homeworks", async (req, res) => {
+  const homeworks = await Homework.find({});
+
+  if (homeworks) {
+    res.json(homeworks);
+  } else {
+    res.status(404).json({
+      message: "HomeWorks Not Found",
+    });
+  }
+});
+
 export default router;
