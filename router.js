@@ -36,4 +36,18 @@ router.get("/homeworks", async (req, res) => {
   }
 });
 
+//  @desc Get by id homework
+//  @router Get /api/homework/:id
+router.get("/homeworks/:id", async (req, res) => {
+  const homework = await Homework.findById(req.params.id);
+
+  if (homework) {
+    res.json(homework);
+  } else {
+    res.status(404).json({
+      message: "Homework not found",
+    });
+  }
+});
+
 export default router;
