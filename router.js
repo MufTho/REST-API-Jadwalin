@@ -71,4 +71,21 @@ router.put("/homeworks/:id", async (req, res) => {
   }
 });
 
+// @desc Delete homework
+// @router Delete /api/homework/:id
+router.delete("/homeworks/:id", async (req, res) => {
+  const homework = await Homework.findById(req.params.id);
+
+  if (homework) {
+    await homework.remove();
+    res.json({
+      message: "Data Remove",
+    });
+  } else {
+    res.status(404).json({
+      message: "homework not found",
+    });
+  }
+});
+
 export default router;
