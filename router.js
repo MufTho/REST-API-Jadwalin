@@ -5,7 +5,6 @@ const router = express.Router();
 
 // @decs Create new homework
 // @router POST /api/homeworks
-
 router.post("/homeworks", async (req, res) => {
   try {
     const { course, title, due_date, status } = req.body;
