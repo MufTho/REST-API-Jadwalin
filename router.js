@@ -36,7 +36,7 @@ router.get("/homeworks", async (req, res) => {
 });
 
 //  @desc Get by id homework
-//  @router Get /api/homework/:id
+//  @router Get /api/homeworks/:id
 router.get("/homeworks/:id", async (req, res) => {
   const homework = await Homework.findById(req.params.id);
 
@@ -50,7 +50,7 @@ router.get("/homeworks/:id", async (req, res) => {
 });
 
 // @decs Update homework
-// @router PUT /api/homework/:id
+// @router PUT /api/homeworks/:id
 router.put("/homeworks/:id", async (req, res) => {
   const { course, title, due_date, status } = req.body;
 
@@ -71,12 +71,28 @@ router.put("/homeworks/:id", async (req, res) => {
 });
 
 // @desc Delete homework
-// @router Delete /api/homework/:id
+// @router Delete /api/homeworks/:id
 router.delete("/homeworks/:id", async (req, res) => {
   const homework = await Homework.findById(req.params.id);
 
   if (homework) {
     await homework.remove();
+    res.json({
+      message: "Data Remove",
+    });
+  } else {
+    res.status(404).json({
+      message: "homework not found",
+    });
+  }
+});
+
+// @desc Delete all homework
+// @router Delete /api/homeworks/
+router.delete("/homeworks", async (req, res) => {
+  const homework = await Homework.deleteMany();
+
+  if (homework) {
     res.json({
       message: "Data Remove",
     });
